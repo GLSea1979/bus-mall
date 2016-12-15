@@ -6,6 +6,7 @@ var itemsForSale = [];
 var previouslyDisplayed = [];
 var chartSelected = [];
 var chartViewed = [];
+var percentageSelected = [];
 var myStorage = [];
 var leftRandom = 0;
 var centerRandom = 0;
@@ -85,7 +86,7 @@ function makeFinalList() {
   for (var i = 0; i < itemsForSale.length; i++) {
     var finalList = document.getElementById('piclist');
     var liEl = document.createElement('li');
-    liEl.textContent = 'The ' + itemsForSale[i].productName + ' was selected: ' + itemsForSale[i].timesSelected + ' out of ' + itemsForSale[i].timesViewed + ' times being viewed.'
+    liEl.textContent = 'The ' + itemsForSale[i].productName + ' was selected: ' + itemsForSale[i].timesSelected + ' out of ' + itemsForSale[i].timesViewed + ' times being viewed. It was picked ' + percentageSelected[i] + '% of the time.'
     finalList.appendChild(liEl);
   }
 
@@ -95,6 +96,7 @@ function insertChartData() {
   for (var i = 0; i < itemsForSale.length; i++) {
     chartSelected[i] = itemsForSale[i].timesSelected;
     chartViewed[i] = itemsForSale[i].timesViewed;
+    percentageSelected[i] = Math.round(itemsForSale[i].timesSelected/itemsForSale[i].timesViewed * 100) / 100;
   }
 }
  // ******************** Event Handler ********************************
@@ -174,7 +176,7 @@ function createArray () {
 function makeChart() {
   var ctx = document.getElementById("myChart").getContext("2d");
   var myChart = new Chart(ctx, {
-    type: 'polarArea',
+    type: 'bar',
     data: {
       labels: productNames,
       datasets: [{
@@ -185,6 +187,10 @@ function makeChart() {
         label: 'Times Selected',
         data: chartSelected,
         backgroundColor: 'rgba(29, 147, 13, 0.6)'
+      }, {
+        label: 'Percent Picked',
+        data: percentageSelected,
+        backgroundColor: 'rgba(66, 241, 244, 0.6)'
       }]
     }
   });
