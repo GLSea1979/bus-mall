@@ -86,7 +86,7 @@ function makeFinalList() {
   for (var i = 0; i < itemsForSale.length; i++) {
     var finalList = document.getElementById('piclist');
     var liEl = document.createElement('li');
-    liEl.textContent = 'The ' + itemsForSale[i].productName + ' was selected: ' + itemsForSale[i].timesSelected + ' out of ' + itemsForSale[i].timesViewed + ' times being viewed. It was picked ' + percentageSelected[i] + '% of the time.'
+    liEl.textContent = 'The ' + itemsForSale[i].productName + ' was selected: ' + itemsForSale[i].timesSelected + ' out of ' + itemsForSale[i].timesViewed + ' times being viewed. It was picked ' + percentageSelected[i] + '% of the times it was viewed.'
     finalList.appendChild(liEl);
   }
 
