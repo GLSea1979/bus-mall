@@ -86,7 +86,7 @@ function makeFinalList() {
   for (var i = 0; i < itemsForSale.length; i++) {
     var finalList = document.getElementById('piclist');
     var liEl = document.createElement('li');
-    liEl.textContent = 'The ' + itemsForSale[i].productName + ' was selected: ' + itemsForSale[i].timesSelected + ' out of ' + itemsForSale[i].timesViewed + ' times being viewed. It was picked ' + percentageSelected[i] + '% of the times it was viewed.'
+    liEl.textContent = itemsForSale[i].productName + ' picked: ' + itemsForSale[i].timesSelected + ' of ' + itemsForSale[i].timesViewed + ' views. Chosen ' + percentageSelected[i] + '% of views.'
     finalList.appendChild(liEl);
   }
 
@@ -142,9 +142,9 @@ function toggleChart() {
   var checkdown = chartToggle % 2;
   console.log(checkdown);
 
-  document.getElementById('chartcontainer').hidden = true;
+  document.getElementById('chartcontainer').style.display = 'none';
   if (checkdown === 0) {
-    document.getElementById('chartcontainer').hidden = false;
+    document.getElementById('chartcontainer').style.display = 'inline-block';
   }
 }
 // *********************** check the total clicks and do stop actions ****
@@ -152,7 +152,7 @@ function checkTotalClicks() {
   if (totalClicks > 24) {
     selection.removeEventListener("click", handleSelectionSubmit);
     document.getElementById('results').hidden = false;
-    document.getElementById('chart').hidden = false;
+    document.getElementById('chart').style.display = 'inline-block';
     choicebar.addEventListener("click", showHideHandler);
     insertChartData();
     makeFinalList();
@@ -187,10 +187,6 @@ function makeChart() {
         label: 'Times Selected',
         data: chartSelected,
         backgroundColor: 'rgba(29, 147, 13, 0.6)'
-      }, {
-        label: 'Percent Picked',
-        data: percentageSelected,
-        backgroundColor: 'rgba(66, 241, 244, 0.6)'
       }]
     }
   });
